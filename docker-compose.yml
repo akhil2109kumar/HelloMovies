@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  # Django Service
+  web:
+    build:
+      context: ./backend  
+      dockerfile: Dockerfile 
+    ports:
+      - "8000:8000"  
+    volumes:
+      - ./backend:/app 
+    command: sh -c "python manage.py makemigrations --noinput &&
+                    python manage.py migrate &&
+                    gunicorn --workers=5 --threads=8 --timeout 1000 Movie.wsgi:application --bind 0.0.0.0:8000"
+    depends_on:
+      - db_postgres
+    env_file:
+      - .env  
+
+  # Frontend Service
+  frontend:
+    build: ./frontend/movies/  
+    ports:
+      - "3000:3000"  
+    volumes:
+      - ./frontend/movies/:/app/
+      - /app/node_modules
+   
+    depends_on:
+      - web
+
+  # PostgreSQL Service
+  db_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${POSTGRES_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:
