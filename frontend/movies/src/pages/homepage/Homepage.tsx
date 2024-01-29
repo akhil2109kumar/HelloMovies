@@ -1,27 +1,27 @@
 import React from "react";
-import Header from "../../components/header/Header";
+import Loader from "../../components/loader/Loader";
 
 const HomePage = () => {
   return (
     <>
-      <div className="bg-black text-white min-h-screen flex flex-col">
-        <Header />
+      <div className="bg-black text-white my-60 flex flex-col">
+        {/* <Loader /> */}
         <nav className="p-4"></nav>
         <main className="flex-grow flex flex-col items-center justify-center p-4">
-          <h1 className="text-4xl font-sans mb-4">
+          <h1 className="text-6xl font-sans font-bold w-2/5 leading-none text-center mb-4">
             Need help finding the next movie?
           </h1>
-          <p className="mb-4">
+          <p className="mb-4 text-cyan-200 tracking-wide text-center w-3/12">
             Search for your next movie through HelloMovie's huge movie library
           </p>
-          <div className="flex items-center mb-4">
+          <div className="flex items-center mb-4 w-3/12">
             <label
               htmlFor="default-search"
               className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
             >
               Search
             </label>
-            <div className="relative">
+            <div className="relative w-full">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
                   className="w-3 h-3 text-gray-500 dark:text-yellow-400"
@@ -42,7 +42,7 @@ const HomePage = () => {
               <input
                 type="search"
                 id="default-search"
-                className="block w-full p-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-full p-3 ps-10 text-sm text-gray-400 rounded-lg h-14 bg-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search for your next movie"
               />
             </div>

@@ -2,14 +2,17 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/homepage/Homepage";
+import Layout from "./components/layout";
 
 const App = () => {
   return (
-    <div>
+    <div className="h-screen bg-black">
       <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </Layout>
       </Router>
     </div>
   );
