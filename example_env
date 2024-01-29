@@ -1,0 +1,8 @@
+# create .env using this 
+
+POSTGRES_NAME=movie_db
+POSTGRES_USER=admin_user
+POSTGRES_PASSWORD=admin
+POSTGRES_HOST=db_postgres
+POSTGRES_PORT=5432
+

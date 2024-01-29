@@ -6,6 +6,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# .env
+.env
+
 # data
 data/
 
@@ -15,3 +18,5 @@ migrations/
 
 #dependencies
 node_modules/
+
+
