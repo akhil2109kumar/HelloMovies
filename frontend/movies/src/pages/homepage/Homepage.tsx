@@ -1,20 +1,21 @@
 import React from "react";
 import Loader from "../../components/loader/Loader";
+import MovieSearchPage from "../moviesearch/MovieSearch";
 
 const HomePage = () => {
   return (
     <>
-      <div className="bg-black text-white my-60 flex flex-col">
+      <div className="bg-black text-white lg:mt-60 lg:mb-0 my-10 flex flex-col">
         {/* <Loader /> */}
         <nav className="p-4"></nav>
-        <main className="flex-grow flex flex-col items-center justify-center p-4">
-          <h1 className="text-6xl font-sans font-bold w-2/5 leading-none text-center mb-4">
+        <main className="flex-grow flex flex-col items-center justify-center p-4 h-96 items-center">
+          <h1 className="lg:text-6xl text-3xl font-sans font-bold lg:w-2/5 w-3/4 leading-none text-center mb-4">
             Need help finding the next movie?
           </h1>
-          <p className="mb-4 text-cyan-200 tracking-wide text-center w-3/12">
+          <p className="mb-4 text-cyan-200 tracking-wide text-center lg:w-3/12 w-3/4">
             Search for your next movie through HelloMovie's huge movie library
           </p>
-          <div className="flex items-center mb-4 w-3/12">
+          <div className="flex items-center mb-4 lg:w-3/12 w-11/12">
             <label
               htmlFor="default-search"
               className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -84,7 +85,11 @@ const HomePage = () => {
           </div>
         </main>
 
-        <div className="text-amber-400 text-center mt-5">No results found for "Search movie name"</div>
+        <MovieSearchPage />
+
+        {/* <div className="text-amber-400 text-center mt-5">
+          No results found for "Search movie name"
+        </div> */}
       </div>
     </>
   );
