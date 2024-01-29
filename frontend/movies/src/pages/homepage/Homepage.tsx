@@ -83,6 +83,8 @@ const HomePage = () => {
             <div>TV Shows</div>
           </div>
         </main>
+
+        <div className="text-amber-400 text-center mt-5">No results found for "Search movie name"</div>
       </div>
     </>
   );
