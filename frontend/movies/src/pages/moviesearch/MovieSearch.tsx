@@ -51,16 +51,17 @@ const MovieSearchPage = ({ data }: any) => {
         </div>
         <div className="flex flex-wrap max-w-[1200px] mx-auto gap-12 cursor-pointer justify-between">
           {/* div 1 */}
-          {data?.results.map((item: any, index: any) => (
+          {data && data?.results?.map((item: any, index: any) => (
             <div
               className="flex flex-col items-center justify-center text-center w-[21%]"
-              onClick={() => navigate("/moviesdetails")}
+              onClick={() => navigate("/moviesdetails", { state: { key: item.id } })}
             >
               <img
                 className="w-full rounded-lg"
                 src={item.image}
                 alt="Movie Poster"
               />
+              
               <h3 className="mt-2 font-bold text-blue-400 text-base">
                 {item.title}
               </h3>
@@ -108,6 +109,9 @@ const MovieSearchPage = ({ data }: any) => {
             </span>
           </p>
         </div>
+        {data.results.length != 0?  <div>""</div>:<div className="text-amber-400 text-center mt-5">
+          No results found for "Search movie name"
+        </div>}
       </section>
     </div>
   );

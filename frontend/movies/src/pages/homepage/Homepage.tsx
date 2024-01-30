@@ -2,140 +2,35 @@ import React, { useEffect, useState } from "react";
 import Loader from "../../components/loader/Loader";
 import MovieSearchPage from "../moviesearch/MovieSearch";
 import { moviesApiCaller } from "../../services/ApiCaller";
+import axios from 'axios';
+
 const HomePage = () => {
-  const [movieData, setMovieData ] = useState<any>();
+  const [movieData, setMovieData ] = useState<any>([]);
+  const [loder, setLoder] = useState<any>(false)
+  const [search, setSearch] = useState<any>([])
+
   const getAllMovies = async () => {
     try {
-      // const data = await moviesApiCaller();
-      const data ={
-        "count": 8,
-        "next": null,
-        "previous": null,
-        "results": [
-            {
-                "id": 1,
-                "title": "dafsgdfsdfsg",
-                "image": "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRGuROe_0kSCaXK12Qm-aCXNSY5SwBB3r4HVslfwukaG9TV2FqKX_C1fMLcNhVUK_KU",
-                "director": "fghfghd",
-                "genres": "gffghdfh",
-                "hours": 1,
-                "minutes": 2,
-                "score": 4.0,
-                "rating": "5",
-                "overview": "jhghjghjghj",
-                "year": 1001,
-                "actors": "sddfgfs"
-            },
-            {
-                "id": 2,
-                "title": "cccccc",
-                "image": "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRGuROe_0kSCaXK12Qm-aCXNSY5SwBB3r4HVslfwukaG9TV2FqKX_C1fMLcNhVUK_KU",
-                "director": "dfgfhfghd",
-                "genres": "ghdfhf",
-                "hours": 4,
-                "minutes": 4,
-                "score": 4.0,
-                "rating": "4",
-                "overview": "dfhdfjtghjgff",
-                "year": 2002,
-                "actors": "dfvdfsbdfsbfd"
-            },
-            {
-                "id": 3,
-                "title": "cvbxcvcx",
-                "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQA_-tL18_rj9zEcjN6n41NEaJm-kRNF9UeOtvksZ4z_OW6jRA9",
-                "director": "fghfghd",
-                "genres": "gffghdfh",
-                "hours": 2,
-                "minutes": 2,
-                "score": 3.0,
-                "rating": "4",
-                "overview": "asdvsdvdfv",
-                "year": 2002,
-                "actors": "dfvdfsbdfsbfd"
-            },
-            {
-                "id": 4,
-                "title": "sdfsdfdf",
-                "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQA_-tL18_rj9zEcjN6n41NEaJm-kRNF9UeOtvksZ4z_OW6jRA9",
-                "director": "sdfdfs",
-                "genres": "dsffd",
-                "hours": 2,
-                "minutes": 3,
-                "score": 3.0,
-                "rating": "4",
-                "overview": "dffdgfdg",
-                "year": 2002,
-                "actors": "fdvsfdsfd"
-            },
-            {
-                "id": 5,
-                "title": "dfvdfvd",
-                "image": "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRGuROe_0kSCaXK12Qm-aCXNSY5SwBB3r4HVslfwukaG9TV2FqKX_C1fMLcNhVUK_KU",
-                "director": "sdfvdfsv",
-                "genres": "dfsbvdf",
-                "hours": 3,
-                "minutes": 3,
-                "score": 3.0,
-                "rating": "3",
-                "overview": "vdffdsb",
-                "year": 2002,
-                "actors": "sddfgfs"
-            },
-            {
-                "id": 6,
-                "title": "adfvsdfbvdfs",
-                "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQA_-tL18_rj9zEcjN6n41NEaJm-kRNF9UeOtvksZ4z_OW6jRA9",
-                "director": "dfgfhfghd",
-                "genres": "dsffd",
-                "hours": 2,
-                "minutes": 1,
-                "score": 2.0,
-                "rating": "2",
-                "overview": "sddffdgdffd",
-                "year": 2002,
-                "actors": "fdvsfdsfd"
-            },
-            {
-                "id": 7,
-                "title": "fdvsdfdf",
-                "image": "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRGuROe_0kSCaXK12Qm-aCXNSY5SwBB3r4HVslfwukaG9TV2FqKX_C1fMLcNhVUK_KU",
-                "director": "sdfvsdf",
-                "genres": "sdfvdfs",
-                "hours": 2,
-                "minutes": 2,
-                "score": 2.0,
-                "rating": "2",
-                "overview": "vbfgbfgb",
-                "year": 2023,
-                "actors": "dfssdfbdfs"
-            },
-            {
-                "id": 8,
-                "title": "adfsdfbsdf",
-                "image": "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRGuROe_0kSCaXK12Qm-aCXNSY5SwBB3r4HVslfwukaG9TV2FqKX_C1fMLcNhVUK_KU",
-                "director": "sdfbdfs",
-                "genres": "dfsvdfs",
-                "hours": 2,
-                "minutes": 3,
-                "score": 3.0,
-                "rating": "3",
-                "overview": "3DSFGGSDF",
-                "year": 2002,
-                "actors": "DFGSDF"
-            }
-        ]
-    }
-    setMovieData(data)
-      console.log(data);
+      const data = await moviesApiCaller();
+    setMovieData(data.data)
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    getAllMovies();
-  }, []);
 
+  const searchFunction = async(value: string) => {
+    await fetchData(value)
+  }
+  async function fetchData(value: string){
+    setLoder(true)
+    try{
+        const response = await axios.get(`http://localhost:8000/api/movies/?search=${value}`)
+        setMovieData(response.data)
+        setLoder(false)
+    }catch(error){
+        console.log("error", error)
+    }
+}
   return (
     <>
       <div className="bg-black text-white lg:mt-40 lg:mb-0 my-10 flex flex-col">
@@ -178,6 +73,7 @@ const HomePage = () => {
                 id="default-search"
                 className="block w-full p-3 ps-10 text-sm text-gray-400 rounded-lg h-14 bg-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search for your next movie"
+                onChange={(event)=> searchFunction(event.target.value)}
               />
             </div>
           </div>
@@ -197,7 +93,7 @@ const HomePage = () => {
               </svg>
             </div>
             <div className="mr-5">
-              <button>Movies</button>
+              <button onClick={() => getAllMovies()}>Movies</button>
             </div>
 
             <div className="flex self-center mx-1 ">
@@ -218,11 +114,8 @@ const HomePage = () => {
           </div>
         </main>
 
-        <MovieSearchPage data={movieData} />
-
-        {/* <div className="text-amber-400 text-center mt-5">
-          No results found for "Search movie name"
-        </div> */}
+        {movieData.results  && <MovieSearchPage data={movieData} getAllMovies={getAllMovies} />}
+        {loder &&<Loader/>}
       </div>
     </>
   );
