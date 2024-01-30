@@ -49,89 +49,45 @@ const MovieSearchPage = ({ data }: any) => {
             </span>
           </p>
         </div>
-
-        <div className="flex gap-12 cursor-pointer">
+        <div className="flex flex-wrap max-w-[1200px] mx-auto gap-12 cursor-pointer justify-between">
           {/* div 1 */}
-          <div
-            className="flex flex-col items-center justify-center text-center"
-            onClick={() => navigate("/moviesdetails")}
-          >
-            <img
-              className="w-48 rounded-lg"
-              src="https://m.media-amazon.com/images/M/MV5BYmI3N2EzOWQtZjFiMi00MjgwLTgzN2UtZGI0ZGY1ZDQyOTRiXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg"
-              alt="Movie Poster"
-            />
-            <h3 className="mt-2 font-bold text-blue-400">TULSA KING</h3>
-            <p className="text-sm">Genre, Duration Genre, Duration</p>
-            <p className="text-sm">IMDb: 7.2</p>
-          </div>
+          {data?.results.map((item: any, index: any) => (
+            <div
+              className="flex flex-col items-center justify-center text-center w-[21%]"
+              onClick={() => navigate("/moviesdetails")}
+            >
+              <img
+                className="w-full rounded-lg"
+                src={item.image}
+                alt="Movie Poster"
+              />
+              <h3 className="mt-2 font-bold text-blue-400 text-base">
+                {item.title}
+              </h3>
+              <p className="text-xs font-light">
+                {item.genres}
+              </p>
 
-          {/* div 2 */}
-          <div
-            className="flex flex-col items-center justify-center text-center"
-            onClick={() => navigate("/moviesdetails")}
-          >
-            <img
-              className="w-48 rounded-lg"
-              src="https://m.media-amazon.com/images/M/MV5BMjYxYmRlZWYtMzAwNC00MDA1LWJjNTItOTBjMzlhNGMzYzk3XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg"
-              alt="Movie Poster"
-            />
-            <h3 className="mt-2 font-bold text-blue-400">KING KONG</h3>
-            <p className="text-sm">Genre, Duration Genre, Duration</p>
-            <p className="text-sm">IMDb: 7.2</p>
-          </div>
-
-          {/* div 3  Applied CSS*/}
-          <div
-            className="flex flex-col items-center justify-center text-center"
-            onClick={() => navigate("/moviesdetails")}
-          >
-            <img
-              className="w-48 rounded-lg"
-              src="https://www.sonypictures.com/sites/default/files/styles/max_560x840/public/title-key-art/thewomanking_onesheet_1400x2100_est.jpg?itok=Tm2Mq2st"
-              alt="Movie Poster"
-            />
-            <h3 className="mt-2 font-bold text-blue-400 text-base">
-              THE WOMAN KING
-            </h3>
-            <p className="text-xs font-light">
-              Genre, Duration Genre, Duration
-            </p>
-
-            <p className="text-xs flex items-center font-light">
-              IMDb:{" "}
-              <span className="px-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                >
-                  <path
-                    d="M5.23247 0.582263C5.47405 -0.194088 6.52593 -0.194088 6.76747 0.582263L7.63065 3.35612C7.73871 3.70332 8.04852 3.93839 8.3982 3.93839H11.1914C11.9732 3.93839 12.2983 4.98296 11.6658 5.46277L9.406 7.17711C9.12314 7.39166 9.00476 7.77203 9.11281 8.11921L9.976 10.8931C10.2175 11.6694 9.36662 12.3151 8.73408 11.8353L6.47436 10.1209C6.1915 9.90632 5.80849 9.90632 5.52564 10.1209L3.26586 11.8353C2.6334 12.3151 1.78242 11.6694 2.024 10.8931L2.88715 8.11921C2.99519 7.77203 2.87683 7.39166 2.59399 7.17711L0.334213 5.46277C-0.29826 4.98296 0.0267889 3.93839 0.80856 3.93839H3.6018C3.95142 3.93839 4.26127 3.70332 4.36932 3.35612L5.23247 0.582263Z"
-                    fill="#FBBF24"
-                  />
-                </svg>
-              </span>
-              7.2
-            </p>
-          </div>
-
-          {/* DIV 4 */}
-          <div
-            className="flex flex-col items-center justify-center text-center"
-            onClick={() => navigate("/moviesdetails")}
-          >
-            <img
-              className="w-48 rounded-lg"
-              src="https://www.artofvfx.com/wp-content/uploads/2019/08/the-king-poster.jpg"
-              alt="Movie Poster"
-            />
-            <h3 className="mt-2 font-bold text-blue-400">THE WOMAN KING</h3>
-            <p className="text-sm">Genre, Duration Genre, Duration</p>
-            <p className="text-sm">IMDb: 7.2</p>
-          </div>
+              <p className="text-xs flex items-center font-light">
+                IMDb:{" "}
+                <span className="px-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                  >
+                    <path
+                      d="M5.23247 0.582263C5.47405 -0.194088 6.52593 -0.194088 6.76747 0.582263L7.63065 3.35612C7.73871 3.70332 8.04852 3.93839 8.3982 3.93839H11.1914C11.9732 3.93839 12.2983 4.98296 11.6658 5.46277L9.406 7.17711C9.12314 7.39166 9.00476 7.77203 9.11281 8.11921L9.976 10.8931C10.2175 11.6694 9.36662 12.3151 8.73408 11.8353L6.47436 10.1209C6.1915 9.90632 5.80849 9.90632 5.52564 10.1209L3.26586 11.8353C2.6334 12.3151 1.78242 11.6694 2.024 10.8931L2.88715 8.11921C2.99519 7.77203 2.87683 7.39166 2.59399 7.17711L0.334213 5.46277C-0.29826 4.98296 0.0267889 3.93839 0.80856 3.93839H3.6018C3.95142 3.93839 4.26127 3.70332 4.36932 3.35612L5.23247 0.582263Z"
+                      fill="#FBBF24"
+                    />
+                  </svg>
+                </span>
+                {item.rating}
+              </p>
+            </div>
+          ))}
         </div>
 
         <div className="flex justify-between mt-8">

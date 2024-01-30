@@ -1,12 +1,132 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Loader from "../../components/loader/Loader";
 import MovieSearchPage from "../moviesearch/MovieSearch";
 import { moviesApiCaller } from "../../services/ApiCaller";
-
 const HomePage = () => {
+  const [movieData, setMovieData ] = useState<any>();
   const getAllMovies = async () => {
     try {
-      const data = await moviesApiCaller();
+      // const data = await moviesApiCaller();
+      const data ={
+        "count": 8,
+        "next": null,
+        "previous": null,
+        "results": [
+            {
+                "id": 1,
+                "title": "dafsgdfsdfsg",
+                "image": "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRGuROe_0kSCaXK12Qm-aCXNSY5SwBB3r4HVslfwukaG9TV2FqKX_C1fMLcNhVUK_KU",
+                "director": "fghfghd",
+                "genres": "gffghdfh",
+                "hours": 1,
+                "minutes": 2,
+                "score": 4.0,
+                "rating": "5",
+                "overview": "jhghjghjghj",
+                "year": 1001,
+                "actors": "sddfgfs"
+            },
+            {
+                "id": 2,
+                "title": "cccccc",
+                "image": "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRGuROe_0kSCaXK12Qm-aCXNSY5SwBB3r4HVslfwukaG9TV2FqKX_C1fMLcNhVUK_KU",
+                "director": "dfgfhfghd",
+                "genres": "ghdfhf",
+                "hours": 4,
+                "minutes": 4,
+                "score": 4.0,
+                "rating": "4",
+                "overview": "dfhdfjtghjgff",
+                "year": 2002,
+                "actors": "dfvdfsbdfsbfd"
+            },
+            {
+                "id": 3,
+                "title": "cvbxcvcx",
+                "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQA_-tL18_rj9zEcjN6n41NEaJm-kRNF9UeOtvksZ4z_OW6jRA9",
+                "director": "fghfghd",
+                "genres": "gffghdfh",
+                "hours": 2,
+                "minutes": 2,
+                "score": 3.0,
+                "rating": "4",
+                "overview": "asdvsdvdfv",
+                "year": 2002,
+                "actors": "dfvdfsbdfsbfd"
+            },
+            {
+                "id": 4,
+                "title": "sdfsdfdf",
+                "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQA_-tL18_rj9zEcjN6n41NEaJm-kRNF9UeOtvksZ4z_OW6jRA9",
+                "director": "sdfdfs",
+                "genres": "dsffd",
+                "hours": 2,
+                "minutes": 3,
+                "score": 3.0,
+                "rating": "4",
+                "overview": "dffdgfdg",
+                "year": 2002,
+                "actors": "fdvsfdsfd"
+            },
+            {
+                "id": 5,
+                "title": "dfvdfvd",
+                "image": "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRGuROe_0kSCaXK12Qm-aCXNSY5SwBB3r4HVslfwukaG9TV2FqKX_C1fMLcNhVUK_KU",
+                "director": "sdfvdfsv",
+                "genres": "dfsbvdf",
+                "hours": 3,
+                "minutes": 3,
+                "score": 3.0,
+                "rating": "3",
+                "overview": "vdffdsb",
+                "year": 2002,
+                "actors": "sddfgfs"
+            },
+            {
+                "id": 6,
+                "title": "adfvsdfbvdfs",
+                "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQA_-tL18_rj9zEcjN6n41NEaJm-kRNF9UeOtvksZ4z_OW6jRA9",
+                "director": "dfgfhfghd",
+                "genres": "dsffd",
+                "hours": 2,
+                "minutes": 1,
+                "score": 2.0,
+                "rating": "2",
+                "overview": "sddffdgdffd",
+                "year": 2002,
+                "actors": "fdvsfdsfd"
+            },
+            {
+                "id": 7,
+                "title": "fdvsdfdf",
+                "image": "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRGuROe_0kSCaXK12Qm-aCXNSY5SwBB3r4HVslfwukaG9TV2FqKX_C1fMLcNhVUK_KU",
+                "director": "sdfvsdf",
+                "genres": "sdfvdfs",
+                "hours": 2,
+                "minutes": 2,
+                "score": 2.0,
+                "rating": "2",
+                "overview": "vbfgbfgb",
+                "year": 2023,
+                "actors": "dfssdfbdfs"
+            },
+            {
+                "id": 8,
+                "title": "adfsdfbsdf",
+                "image": "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRGuROe_0kSCaXK12Qm-aCXNSY5SwBB3r4HVslfwukaG9TV2FqKX_C1fMLcNhVUK_KU",
+                "director": "sdfbdfs",
+                "genres": "dfsvdfs",
+                "hours": 2,
+                "minutes": 3,
+                "score": 3.0,
+                "rating": "3",
+                "overview": "3DSFGGSDF",
+                "year": 2002,
+                "actors": "DFGSDF"
+            }
+        ]
+    }
+    setMovieData(data)
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -16,163 +136,6 @@ const HomePage = () => {
     getAllMovies();
   }, []);
 
-  const dummyApiResponse = {
-    count: 2,
-    next: null,
-    previous: null,
-    results: [
-      {
-        id: 1,
-        title: "ABC",
-        image:
-          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQclH6pL5jY-fm1x_3880ijX6V-l5U2temNph2V8i6kSvc3V_30fr8&usqp=CAE&s=19",
-        director: "sdfsdf",
-        genres: "sdfsdf",
-        hours: 2,
-        minutes: 4,
-        score: 5.0,
-        rating: "6",
-        overview: "hfhdgfhfghdhfhshs",
-        year: 2002,
-        actors: "chetan",
-      },
-      {
-        id: 2,
-        title: "efgh",
-        image:
-          "https://lumiere-a.akamaihd.net/v1/images/p_avengersinfinitywar_19871_cb171514.jpeg?region=0%2C0%2C540%2C810",
-        director: "savdsfvfdsvfd",
-        genres: "sdfvsdfbfsdb",
-        hours: 1,
-        minutes: 3,
-        score: 4.0,
-        rating: "6",
-        overview: "bfdbfgbfgbd",
-        year: 2002,
-        actors: "tanuj",
-      },
-      {
-        id: 1,
-        title: "ABC",
-        image:
-          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQclH6pL5jY-fm1x_3880ijX6V-l5U2temNph2V8i6kSvc3V_30fr8&usqp=CAE&s=19",
-        director: "sdfsdf",
-        genres: "sdfsdf",
-        hours: 2,
-        minutes: 4,
-        score: 5.0,
-        rating: "6",
-        overview: "hfhdgfhfghdhfhshs",
-        year: 2002,
-        actors: "chetan",
-      },
-      {
-        id: 2,
-        title: "efgh",
-        image:
-          "https://lumiere-a.akamaihd.net/v1/images/p_avengersinfinitywar_19871_cb171514.jpeg?region=0%2C0%2C540%2C810",
-        director: "savdsfvfdsvfd",
-        genres: "sdfvsdfbfsdb",
-        hours: 1,
-        minutes: 3,
-        score: 4.0,
-        rating: "6",
-        overview: "bfdbfgbfgbd",
-        year: 2002,
-        actors: "tanuj",
-      },
-      {
-        id: 1,
-        title: "ABC",
-        image:
-          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQclH6pL5jY-fm1x_3880ijX6V-l5U2temNph2V8i6kSvc3V_30fr8&usqp=CAE&s=19",
-        director: "sdfsdf",
-        genres: "sdfsdf",
-        hours: 2,
-        minutes: 4,
-        score: 5.0,
-        rating: "6",
-        overview: "hfhdgfhfghdhfhshs",
-        year: 2002,
-        actors: "chetan",
-      },
-      {
-        id: 2,
-        title: "efgh",
-        image:
-          "https://lumiere-a.akamaihd.net/v1/images/p_avengersinfinitywar_19871_cb171514.jpeg?region=0%2C0%2C540%2C810",
-        director: "savdsfvfdsvfd",
-        genres: "sdfvsdfbfsdb",
-        hours: 1,
-        minutes: 3,
-        score: 4.0,
-        rating: "6",
-        overview: "bfdbfgbfgbd",
-        year: 2002,
-        actors: "tanuj",
-      },
-      {
-        id: 1,
-        title: "ABC",
-        image:
-          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQclH6pL5jY-fm1x_3880ijX6V-l5U2temNph2V8i6kSvc3V_30fr8&usqp=CAE&s=19",
-        director: "sdfsdf",
-        genres: "sdfsdf",
-        hours: 2,
-        minutes: 4,
-        score: 5.0,
-        rating: "6",
-        overview: "hfhdgfhfghdhfhshs",
-        year: 2002,
-        actors: "chetan",
-      },
-      {
-        id: 2,
-        title: "efgh",
-        image:
-          "https://lumiere-a.akamaihd.net/v1/images/p_avengersinfinitywar_19871_cb171514.jpeg?region=0%2C0%2C540%2C810",
-        director: "savdsfvfdsvfd",
-        genres: "sdfvsdfbfsdb",
-        hours: 1,
-        minutes: 3,
-        score: 4.0,
-        rating: "6",
-        overview: "bfdbfgbfgbd",
-        year: 2002,
-        actors: "tanuj",
-      },
-      {
-        id: 1,
-        title: "ABC",
-        image:
-          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQclH6pL5jY-fm1x_3880ijX6V-l5U2temNph2V8i6kSvc3V_30fr8&usqp=CAE&s=19",
-        director: "sdfsdf",
-        genres: "sdfsdf",
-        hours: 2,
-        minutes: 4,
-        score: 5.0,
-        rating: "6",
-        overview: "hfhdgfhfghdhfhshs",
-        year: 2002,
-        actors: "chetan",
-      },
-      {
-        id: 2,
-        title: "efgh",
-        image:
-          "https://lumiere-a.akamaihd.net/v1/images/p_avengersinfinitywar_19871_cb171514.jpeg?region=0%2C0%2C540%2C810",
-        director: "savdsfvfdsvfd",
-        genres: "sdfvsdfbfsdb",
-        hours: 1,
-        minutes: 3,
-        score: 4.0,
-        rating: "6",
-        overview: "bfdbfgbfgbd",
-        year: 2002,
-        actors: "tanuj",
-      },
-    ],
-  };
   return (
     <>
       <div className="bg-black text-white lg:mt-40 lg:mb-0 my-10 flex flex-col">
@@ -255,7 +218,7 @@ const HomePage = () => {
           </div>
         </main>
 
-        <MovieSearchPage data={dummyApiResponse} />
+        <MovieSearchPage data={movieData} />
 
         {/* <div className="text-amber-400 text-center mt-5">
           No results found for "Search movie name"
