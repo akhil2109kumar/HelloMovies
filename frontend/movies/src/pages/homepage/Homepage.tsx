@@ -1,11 +1,181 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Loader from "../../components/loader/Loader";
 import MovieSearchPage from "../moviesearch/MovieSearch";
+import { moviesApiCaller } from "../../services/ApiCaller";
 
 const HomePage = () => {
+  const getAllMovies = async () => {
+    try {
+      const data = await moviesApiCaller();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getAllMovies();
+  }, []);
+
+  const dummyApiResponse = {
+    count: 2,
+    next: null,
+    previous: null,
+    results: [
+      {
+        id: 1,
+        title: "ABC",
+        image:
+          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQclH6pL5jY-fm1x_3880ijX6V-l5U2temNph2V8i6kSvc3V_30fr8&usqp=CAE&s=19",
+        director: "sdfsdf",
+        genres: "sdfsdf",
+        hours: 2,
+        minutes: 4,
+        score: 5.0,
+        rating: "6",
+        overview: "hfhdgfhfghdhfhshs",
+        year: 2002,
+        actors: "chetan",
+      },
+      {
+        id: 2,
+        title: "efgh",
+        image:
+          "https://lumiere-a.akamaihd.net/v1/images/p_avengersinfinitywar_19871_cb171514.jpeg?region=0%2C0%2C540%2C810",
+        director: "savdsfvfdsvfd",
+        genres: "sdfvsdfbfsdb",
+        hours: 1,
+        minutes: 3,
+        score: 4.0,
+        rating: "6",
+        overview: "bfdbfgbfgbd",
+        year: 2002,
+        actors: "tanuj",
+      },
+      {
+        id: 1,
+        title: "ABC",
+        image:
+          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQclH6pL5jY-fm1x_3880ijX6V-l5U2temNph2V8i6kSvc3V_30fr8&usqp=CAE&s=19",
+        director: "sdfsdf",
+        genres: "sdfsdf",
+        hours: 2,
+        minutes: 4,
+        score: 5.0,
+        rating: "6",
+        overview: "hfhdgfhfghdhfhshs",
+        year: 2002,
+        actors: "chetan",
+      },
+      {
+        id: 2,
+        title: "efgh",
+        image:
+          "https://lumiere-a.akamaihd.net/v1/images/p_avengersinfinitywar_19871_cb171514.jpeg?region=0%2C0%2C540%2C810",
+        director: "savdsfvfdsvfd",
+        genres: "sdfvsdfbfsdb",
+        hours: 1,
+        minutes: 3,
+        score: 4.0,
+        rating: "6",
+        overview: "bfdbfgbfgbd",
+        year: 2002,
+        actors: "tanuj",
+      },
+      {
+        id: 1,
+        title: "ABC",
+        image:
+          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQclH6pL5jY-fm1x_3880ijX6V-l5U2temNph2V8i6kSvc3V_30fr8&usqp=CAE&s=19",
+        director: "sdfsdf",
+        genres: "sdfsdf",
+        hours: 2,
+        minutes: 4,
+        score: 5.0,
+        rating: "6",
+        overview: "hfhdgfhfghdhfhshs",
+        year: 2002,
+        actors: "chetan",
+      },
+      {
+        id: 2,
+        title: "efgh",
+        image:
+          "https://lumiere-a.akamaihd.net/v1/images/p_avengersinfinitywar_19871_cb171514.jpeg?region=0%2C0%2C540%2C810",
+        director: "savdsfvfdsvfd",
+        genres: "sdfvsdfbfsdb",
+        hours: 1,
+        minutes: 3,
+        score: 4.0,
+        rating: "6",
+        overview: "bfdbfgbfgbd",
+        year: 2002,
+        actors: "tanuj",
+      },
+      {
+        id: 1,
+        title: "ABC",
+        image:
+          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQclH6pL5jY-fm1x_3880ijX6V-l5U2temNph2V8i6kSvc3V_30fr8&usqp=CAE&s=19",
+        director: "sdfsdf",
+        genres: "sdfsdf",
+        hours: 2,
+        minutes: 4,
+        score: 5.0,
+        rating: "6",
+        overview: "hfhdgfhfghdhfhshs",
+        year: 2002,
+        actors: "chetan",
+      },
+      {
+        id: 2,
+        title: "efgh",
+        image:
+          "https://lumiere-a.akamaihd.net/v1/images/p_avengersinfinitywar_19871_cb171514.jpeg?region=0%2C0%2C540%2C810",
+        director: "savdsfvfdsvfd",
+        genres: "sdfvsdfbfsdb",
+        hours: 1,
+        minutes: 3,
+        score: 4.0,
+        rating: "6",
+        overview: "bfdbfgbfgbd",
+        year: 2002,
+        actors: "tanuj",
+      },
+      {
+        id: 1,
+        title: "ABC",
+        image:
+          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQclH6pL5jY-fm1x_3880ijX6V-l5U2temNph2V8i6kSvc3V_30fr8&usqp=CAE&s=19",
+        director: "sdfsdf",
+        genres: "sdfsdf",
+        hours: 2,
+        minutes: 4,
+        score: 5.0,
+        rating: "6",
+        overview: "hfhdgfhfghdhfhshs",
+        year: 2002,
+        actors: "chetan",
+      },
+      {
+        id: 2,
+        title: "efgh",
+        image:
+          "https://lumiere-a.akamaihd.net/v1/images/p_avengersinfinitywar_19871_cb171514.jpeg?region=0%2C0%2C540%2C810",
+        director: "savdsfvfdsvfd",
+        genres: "sdfvsdfbfsdb",
+        hours: 1,
+        minutes: 3,
+        score: 4.0,
+        rating: "6",
+        overview: "bfdbfgbfgbd",
+        year: 2002,
+        actors: "tanuj",
+      },
+    ],
+  };
   return (
     <>
-      <div className="bg-black text-white lg:mt-60 lg:mb-0 my-10 flex flex-col">
+      <div className="bg-black text-white lg:mt-40 lg:mb-0 my-10 flex flex-col">
         {/* <Loader /> */}
         <nav className="p-4"></nav>
         <main className="flex-grow flex flex-col items-center justify-center p-4 h-96 items-center">
@@ -85,7 +255,7 @@ const HomePage = () => {
           </div>
         </main>
 
-        <MovieSearchPage />
+        <MovieSearchPage data={dummyApiResponse} />
 
         {/* <div className="text-amber-400 text-center mt-5">
           No results found for "Search movie name"

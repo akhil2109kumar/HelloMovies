@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const MovieSearchPage = () => {
+const MovieSearchPage = ({ data }: any) => {
   const navigate = useNavigate();
   return (
     <div className="bg-black text-white px-8 self-center">
@@ -23,8 +23,8 @@ const MovieSearchPage = () => {
               >
                 <rect width="32" height="32" rx="8" fill="#04060C" />
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M9 11C9 9.89543 9.89543 9 11 9H13C14.1046 9 15 9.89543 15 11V13C15 14.1046 14.1046 15 13 15H11C9.89543 15 9 14.1046 9 13V11ZM9 19C9 17.8954 9.89543 17 11 17H13C14.1046 17 15 17.8954 15 19V21C15 22.1046 14.1046 23 13 23H11C9.89543 23 9 22.1046 9 21V19ZM17 11C17 9.89543 17.8954 9 19 9H21C22.1046 9 23 9.89543 23 11V13C23 14.1046 22.1046 15 21 15H19C17.8954 15 17 14.1046 17 13V11ZM19 17C17.8954 17 17 17.8954 17 19V21C17 22.1046 17.8954 23 19 23H21C22.1046 23 23 22.1046 23 21V19C23 17.8954 22.1046 17 21 17H19Z"
                   fill="#FBBF24"
                 />
@@ -40,8 +40,8 @@ const MovieSearchPage = () => {
               >
                 <rect width="32" height="32" rx="8" fill="#0F172A" />
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M22.8571 8C23.4883 8 24 8.44772 24 9V11C24 11.5523 23.4883 12 22.8571 12H9.14286C8.51166 12 8 11.5523 8 11V9C8 8.44772 8.51166 8 9.14286 8H22.8571ZM22.8571 14C23.4883 14 24 14.4477 24 15V17C24 17.5523 23.4883 18 22.8571 18H9.14286C8.51166 18 8 17.5523 8 17V15C8 14.4477 8.51166 14 9.14286 14H22.8571ZM22.8571 20C23.4883 20 24 20.4477 24 21V23C24 23.5523 23.4883 24 22.8571 24H9.14286C8.51166 24 8 23.5523 8 23V21C8 20.4477 8.51166 20 9.14286 20H22.8571Z"
                   fill="#475569"
                 />
@@ -141,10 +141,14 @@ const MovieSearchPage = () => {
           </h2>
           <p className="flex justify-center">
             <span className="mx-2.5">
-              <button className="h-8 px-5 text-white text-sm rounded-xl bg-slate-900">Previous</button>
+              <button className="h-8 px-5 text-white text-sm rounded-xl bg-slate-900">
+                Previous
+              </button>
             </span>
             <span className="ms-4">
-              <button className="h-8 px-5 text-white text-sm rounded-xl bg-slate-900">Next</button>
+              <button className="h-8 px-5 text-white text-sm rounded-xl bg-slate-900">
+                Next
+              </button>
             </span>
           </p>
         </div>

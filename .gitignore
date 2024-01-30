@@ -12,10 +12,6 @@ __pycache__/
 # data
 data/
 
-# migrations
-migrations/
-
-
 #dependencies
 node_modules/
 
