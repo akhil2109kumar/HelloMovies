@@ -1,0 +1,75 @@
+import React, { useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const Login = () => {
+  const navigate= useNavigate()
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async() => {
+    // Handle login logic here
+    try{
+      const response = await axios.post('http://localhost:8000/api/login/',{
+        "username": username,
+        "password": password
+    });
+      navigate("/")
+    localStorage.setItem("token", response.data.token);
+    }catch(error){
+      console.log("error", error)
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <div className="text-white p-8 rounded shadow-md w-96">
+        <h1 className="lg:text-6xl text-3xl font-sans font-bold lg:w-2/5 w-3/4 leading-none text-center mb-4">
+          Login
+        </h1>
+        <form>
+          <div className="mb-4">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              id="default-search"
+              className="block w-full p-3 ps-10 text-sm text-gray-400 rounded-lg h-14 bg-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="UserName"
+              onChange={(event)=> setUsername(event.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="default-search"
+              className="block w-full p-3 ps-10 text-sm text-gray-400 rounded-lg h-14 bg-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Enter your password"
+              onChange={(event)=> setPassword(event.target.value)}
+            />
+          </div>
+          <button
+            type="button"
+            className="w-full bg-blue-500 text-white p-2 rounded-md"
+            onClick={handleLogin}
+          >
+            Login
+          </button>
+        </form>
+        <p className="mb-4 text-cyan-200 "> New to HelloMovie's  ? <Link to="/signup"><span className="text-white"> Create your account here </span></Link>  </p>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
