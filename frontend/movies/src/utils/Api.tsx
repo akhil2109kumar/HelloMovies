@@ -5,7 +5,7 @@ const apiCaller = (url: string, method: string, data = {}, host: string) => {
     url: `${host}${url}`,
     method,
     data,
-    headers: { Authorization: localStorage.getItem("authToken") || "" },
+    headers: { Authorization: `Token ${localStorage.getItem("token")}` || "" },
   });
 };
 

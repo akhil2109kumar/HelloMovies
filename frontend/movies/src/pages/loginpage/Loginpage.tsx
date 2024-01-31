@@ -22,9 +22,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center">
       <div className="text-white p-8 rounded shadow-md w-96">
-        <h1 className="lg:text-6xl text-3xl font-sans font-bold lg:w-2/5 w-3/4 leading-none text-center mb-4">
+        <h1 className="lg:text-6xl text-3xl font-sans font-bold leading-none text-center mb-5">
           Login
         </h1>
         <form>
