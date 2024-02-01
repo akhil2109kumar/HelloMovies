@@ -4,12 +4,15 @@ This Project named "Hello Movies" allows users to search for their favorite movi
 
 ## Setup
 
+#### Please ensure Docker is installed on your system in order to run this project.
+
 1. Istall Docker in your System:
 
     For Ubuntu `https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04`
 
     For Windows `https://docs.docker.com/desktop/install/windows-install/`
 
+    For Mac `https://docs.docker.com/desktop/install/mac-install/`
 
 
 2. Clone the repository:
@@ -31,9 +34,15 @@ This Project named "Hello Movies" allows users to search for their favorite movi
 
     ```bash
     docker compose up --build
+    or
+    sudo docker-compose  up --build -d
     ```
 
     This command will start the backend Django server on port 8000 and the frontend React server on port 3000.
+
+## Note
+- For Create Movie data in django admin run `sudo docker exec -it hellomovies_web_1 python manage.py createsuperuser`
+
 
 ## Accessing the Application
 
