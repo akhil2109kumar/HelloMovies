@@ -1,34 +1,43 @@
 import React,{ useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { favoriteApiCaller } from "../../services/ApiCaller";
+import { favoriteApiCaller, moviesApiCaller } from "../../services/ApiCaller";
+import { MovieTypes } from '../../utils/types'
+
+
 const FavoriteMovies = () => {
   const navigate = useNavigate();
   var token = localStorage.getItem("token");
-  const [flag, setFlag] = useState<any>(false)
+  const [movieData, setMovieData ] = useState<MovieTypes[]>([]);
+  const [flag, setFlag] = useState<boolean>(false)
+
   useEffect(()=>{
     if(token === null){
       navigate("/login")
     }else{
-      fetchData()
+      fetchMoviesData()
     }
     
   },[])
-  async function fetchData(){
-    try{
-        const response = await favoriteApiCaller()
-        console.log("response data",response)
-    }catch(error){
-        console.log("error", error)
+  
+  const fetchMoviesData = async () =>{
+    try {
+      const favMovieData = await favoriteApiCaller()
+      const allMovieData = await moviesApiCaller()
+      let favMoviesId:any = []
+      favMovieData.data.results.forEach((item:{id:number,movie:number,user:number}) =>  favMoviesId.push(item.movie))
+      const filterData = allMovieData.data.results.filter((item:MovieTypes) => favMoviesId.includes(item.id))
+      setMovieData(filterData)
+    } catch (error) {
+      console.log(error);
     }
   }
+
   return (
     <div className="bg-black text-white px-8 self-center">
-      {/* Movie Results */}
-      <section className="p-8">
+      {/* <section className="p-8">
         <div className="flex justify-between">
           <h2 className="text-xl font-normal mb-6">
-            Found <span className="text-amber-400">112</span> Movies
+            Found <span className="text-amber-400">{movieData.length}</span> Movies
           </h2>
           <p className="flex justify-center">
             layout:
@@ -49,7 +58,7 @@ const FavoriteMovies = () => {
                 />
               </svg>
             </span>
-            <span onClick={() => setFlag(false)}>
+            <span onClick={() => setFlag(true)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -69,10 +78,11 @@ const FavoriteMovies = () => {
           </p>
         </div>
         <div className="flex flex-wrap max-w-[1200px] mx-auto gap-12 cursor-pointer justify-between">
-        {/* {flag ? <>
-            {data &&
-            data?.results?.map((item: any, index: any) => (
-            <div className="w-full md:w-[46%] lg:w-[47%]">
+         {flag ? <>
+            {movieData &&
+            movieData?.map((item: MovieTypes, index: number) => {
+              return (
+                <div key={index}className="w-full md:w-[46%] lg:w-[47%]">
                 <div className="relative flex gap-3 bg-[#070B15] w-full rounded-2xl">
                   <img
                     className="rounded-lg w-28 h-40"
@@ -116,11 +126,14 @@ const FavoriteMovies = () => {
                     </div>
                   </div>
                 </div>
-              </div>))}
+              </div>
+              )
+            })}
           </> : <>
-          {data &&
-            data?.results?.map((item: any, index: any) => (
+          {movieData &&
+            movieData?.map((item: MovieTypes, index: number) => (
               <div
+              key={index}
                 className="relative flex flex-col items-center justify-center text-center w-[21%]"
                 onClick={() => navigate("/moviesdetails", { state: { key: item.id } })}
               >
@@ -159,7 +172,7 @@ const FavoriteMovies = () => {
                 </p>
               </div>
             ))}
-          </>} */}
+          </>} 
         </div>
 
         <div className="flex justify-between mt-8">
@@ -180,10 +193,7 @@ const FavoriteMovies = () => {
             </span>
           </p>
         </div>
-        {/* {data.results.length != 0?  <div>""</div>:<div className="text-amber-400 text-center mt-5">
-          No results found for "Search movie name"
-        </div>} */}
-      </section>
+      </section> */}
     </div>
   );
 };

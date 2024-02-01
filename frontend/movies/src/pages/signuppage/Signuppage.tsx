@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import  axios from 'axios';
+import axios from "axios";
 const Signuppage = () => {
-  const navigate = useNavigate()
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [firstname, setFirstname] = useState<string>("");
+  const [lastname, setLastname] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errorFlag, setErrorFlag] = useState<boolean>(false);
 
   const handleLogin = async () => {
     // Handle signup api working here
@@ -19,9 +20,10 @@ const Signuppage = () => {
         username: username,
         password: password,
       });
-      navigate("/login")
-    } catch (error) {
-        console.log("error",error)
+      navigate("/login");
+    } catch (error: any) {
+      setErrorFlag(true);
+      console.log("error", error);
     }
   };
 
@@ -31,6 +33,13 @@ const Signuppage = () => {
         <h1 className="lg:text-6xl text-3xl font-sans font-bold leading-none text-center mb-5">
           SignUp
         </h1>
+        {errorFlag ? (
+          <p className="text-amber-400 text-center mt-5">
+            UserName or Password required
+          </p>
+        ) : (
+          ""
+        )}
         <form>
           <div className="mb-4">
             <label
@@ -93,6 +102,7 @@ const Signuppage = () => {
             <input
               type="text"
               id="default-search"
+              required
               className="block w-full p-3 ps-10 text-sm text-gray-400 rounded-lg h-14 bg-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="email"
               onChange={(event: { target: { value: any } }) =>
@@ -110,6 +120,7 @@ const Signuppage = () => {
             <input
               type="password"
               id="default-search"
+              required
               className="block w-full p-3 ps-10 text-sm text-gray-400 rounded-lg h-14 bg-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Enter your password"
               onChange={(event: { target: { value: any } }) =>

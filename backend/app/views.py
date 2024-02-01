@@ -7,7 +7,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 from .models import Movie, FavoriteMovie
-from .serializers import FavoriteMovieSerializer, MovieSerializer, UserSerializer
+from .serializers import FavoriteMovieAddSerializer, FavoriteMovielistSerializer, MovieSerializer, UserSerializer
 from django.contrib.auth.models import User
 
 
@@ -40,9 +40,14 @@ class MovieRetrieveView(generics.RetrieveAPIView):
     serializer_class = MovieSerializer
 
 class FavoriteMovieListView(generics.ListCreateAPIView):
-    serializer_class = FavoriteMovieSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':  
+            return FavoriteMovieAddSerializer
+        else:  
+            return FavoriteMovielistSerializer
 
     def get_queryset(self):
         user = self.request.user
@@ -59,7 +64,7 @@ class FavoriteMovieListView(generics.ListCreateAPIView):
 
 
 class FavoriteMovieDeleteView(generics.DestroyAPIView):
-    serializer_class = FavoriteMovieSerializer
+    serializer_class = FavoriteMovielistSerializer  
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 

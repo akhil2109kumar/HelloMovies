@@ -4,11 +4,14 @@ import axios from 'axios';
 
 const Login = () => {
   const navigate= useNavigate()
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  const [errorFlag, setErrorFlag] = useState<boolean>(false)
 
   const handleLogin = async() => {
     // Handle login logic here
+    if(username || password) {
     try{
       const response = await axios.post('http://localhost:8000/api/login/',{
         "username": username,
@@ -16,8 +19,13 @@ const Login = () => {
     });
       navigate("/")
     localStorage.setItem("token", response.data.token);
-    }catch(error){
-      console.log("error", error)
+    }catch(error: any){
+      setErrorMessage(error.response.data.non_field_errors[0])
+      setErrorFlag(true)
+    }}
+    else{
+      setErrorMessage("username and password field may not be blank.")
+      setErrorFlag(true)
     }
   };
 
@@ -27,6 +35,9 @@ const Login = () => {
         <h1 className="lg:text-6xl text-3xl font-sans font-bold leading-none text-center mb-5">
           Login
         </h1>
+        {errorFlag ? <p className="text-amber-400 text-center mt-5">
+          {errorMessage}
+        </p> : "" }
         <form>
           <div className="mb-4">
             <label

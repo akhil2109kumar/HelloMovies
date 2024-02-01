@@ -1,37 +1,79 @@
 import React, { useEffect, useState } from "react";
 import Loader from "../../components/loader/Loader";
 import MovieSearchPage from "../moviesearch/MovieSearch";
-import { moviesApiCaller } from "../../services/ApiCaller";
-import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import {
+  AddTofavoriteApiCaller,
+  favoriteApiCaller,
+  moviesApiCaller,
+  removefavoriteApiCaller,
+} from "../../services/ApiCaller";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { MovieTypes } from "../../utils/types";
 const HomePage = () => {
-  const navigate = useNavigate()
-  const [movieData, setMovieData ] = useState<any>([]);
-  const [loder, setLoder] = useState<any>(false)
-  const [search, setSearch] = useState<any>([])
+  const navigate = useNavigate();
+  var token = localStorage.getItem("token");
+  const [movieData, setMovieData] = useState<MovieTypes[]>([]);
+  const [favoriteMovies, setFavoriteMovies] = useState<boolean>(false);
+  const [loder, setLoder] = useState<boolean>(false);
 
   const getAllMovies = async () => {
     try {
       const data = await moviesApiCaller();
-    setMovieData(data.data)
+      setFavoriteMovies(false);
+
+      setMovieData(data.data.results);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const searchFunction = async(value: string) => {
-    await fetchData(value)
-  }
-  async function fetchData(value: string){
-    setLoder(true)
-    try{
-        const response = await axios.get(`http://localhost:8000/api/movies/?search=${value}`)
-        setMovieData(response.data)
-        setLoder(false)
-    }catch(error){
-        console.log("error", error)
+  const searchFunction = async (value: string) => {
+    await fetchData(value);
+  };
+  async function fetchData(value: string) {
+    setLoder(true);
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/api/movies/?search=${value}`
+      );
+      setMovieData(response.data.results);
+      setLoder(false);
+    } catch (error) {
+      console.log("error", error);
     }
-}
+  }
+
+  const fetchMoviesData = async () => {
+    if (token === null) {
+      navigate("/login");
+    } else {
+      try {
+        const favMovieData = await favoriteApiCaller();
+        setMovieData(favMovieData.data.results);
+        setFavoriteMovies(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  const addFavorite = async (id: string) => {
+    if (favoriteMovies) {
+      try {
+        const response = await removefavoriteApiCaller({ id });
+        fetchMoviesData()
+      } catch (error) {
+        console.log("error", error);
+      }
+    } else {
+      try {
+        const response = await AddTofavoriteApiCaller({ id });
+        getAllMovies()
+      } catch (error) {
+        console.log("error", error);
+      }
+    }
+  };
   return (
     <>
       <div className="bg-black text-white lg:mt-40 lg:mb-0 my-10 flex flex-col">
@@ -74,7 +116,7 @@ const HomePage = () => {
                 id="default-search"
                 className="block w-full p-3 ps-10 text-sm text-gray-400 rounded-lg h-14 bg-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search for your next movie"
-                onChange={(event)=> searchFunction(event.target.value)}
+                onChange={(event) => searchFunction(event.target.value)}
               />
             </div>
           </div>
@@ -113,18 +155,25 @@ const HomePage = () => {
             </div>
             <div className="mr-5">TV Shows</div>
             <div className="flex self-center mx-1 ">
-            <div className="cursor-pointer h-3 w-4 bg-[#FBBF24] flex items-center justify-center">
-                    <h5 className="text-sm text-gray-800">&#9829;</h5>
-                  </div>
+              <div className="cursor-pointer h-3 w-4 bg-[#FBBF24] flex items-center justify-center">
+                <h5 className="text-sm text-gray-800">&#9829;</h5>
+              </div>
             </div>
             <div className="mr-5">
-              <button onClick={() => navigate("/favoriteMovies") }>Favorite</button>
+              <button onClick={() => fetchMoviesData()}>Favorite</button>
             </div>
           </div>
         </main>
 
-        {movieData.results  && <MovieSearchPage data={movieData} getAllMovies={getAllMovies} />}
-        {loder &&<Loader/>}
+        {movieData.length && (
+          <MovieSearchPage
+            data={movieData}
+            getAllMovies={getAllMovies}
+            favoriteMoviesFlag={favoriteMovies}
+            addFavorite={addFavorite}
+          />
+        )}
+        {loder && <Loader />}
       </div>
     </>
   );

@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
+import { MovieTypes } from '../../utils/types'
 
 const MovieDetailsPage = () => {
-  const [movie, setMovie] = useState<any>([])
+  const [movie, setMovie] = useState<MovieTypes>()
   const navigate = useNavigate();
   const location = useLocation(); 
   useEffect(() => {
     fetchData();
   }, []);
 
+  console.log("movie",movie)
   async function fetchData(){
     try{
         const response = await axios.get(`http://localhost:8000/api/movies/${location.state.key}`)
