@@ -4,14 +4,22 @@ This Project named "Hello Movies" allows users to search for their favorite movi
 
 ## Setup
 
-1. Clone the repository:
+1. Istall Docker in your System:
+
+    For Ubuntu `https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04`
+
+    For Windows `https://docs.docker.com/desktop/install/windows-install/`
+
+
+
+2. Clone the repository:
 
     ```bash
     git clone https://github.com/akhil2109kumar/HelloMovies.git
     cd HelloMovies
     ```
 
-2. Create a `.env` file from the `example_env` file:
+3. Create a `.env` file from the `example_env` file:
 
     ```bash
     cp example_env .env
@@ -19,7 +27,7 @@ This Project named "Hello Movies" allows users to search for their favorite movi
 
     Modify the `.env` file with your configuration settings.
 
-3. Run the following Docker Compose command to build and start the containers:
+4. Run the following Docker Compose command to build and start the containers:
 
     ```bash
     docker compose up --build
